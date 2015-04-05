@@ -174,6 +174,10 @@ public int getTimeSpent();
 public byte[][] getScreenCapture();
 
 void saveLastRun(String filename);
+
+public int getMarioX();
+
+public int getMarioY();
 }
 
 

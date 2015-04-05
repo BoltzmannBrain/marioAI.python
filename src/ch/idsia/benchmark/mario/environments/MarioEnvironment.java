@@ -212,11 +212,24 @@ public void tick()
     levelScene.tick();
     if (GlobalOptions.isVisualization)
         marioVisualComponent.tick();
+//    return (levelScene.mario.mapX, levelScene.mario.mapY)
+////    System.out.println("MARIO X: " + levelScene.mario.mapX);
+////	System.out.println("MARIO Y: " + levelScene.mario.mapY);
 }
 
 public float[] getMarioFloatPos()
 {
     return levelScene.getMarioFloatPos();
+}
+
+public int getMarioX() {
+	System.out.println("MARIO X: " + levelScene.mario.mapX);
+	return levelScene.mario.mapX;
+}
+
+public int getMarioY() {
+	System.out.println("MARIO Y: " + levelScene.mario.mapY);
+	return levelScene.mario.mapY;
 }
 
 public int getMarioMode()
@@ -736,6 +749,7 @@ public void saveLastRun(String filename)
         }
     }
 }
+
 
 //public void setRecording(boolean isRecording)
 //{

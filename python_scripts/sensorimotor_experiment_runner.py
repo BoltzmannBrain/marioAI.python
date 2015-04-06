@@ -111,19 +111,20 @@ class MarioSensorimotorRunner(object):
 #     motorSequence,
 #     sensorimotorSequence,
 #     sequenceLabels) = sequences
-    (sensorSequence, motorSequence) = sequences
+    (sensorSequences, motorSequences) = sequences
   
     currentTime = time.time()
 
-    for i in xrange(len(sensorSequence)):
-      sensorPattern = sensorSequence[i]
-      motorPattern = motorSequence[i]
-      sensorimotorPattern = sensorimotorSequence[i]
-      
-      tm.compute(sensorPattern,  # here the sequences are e.g. set([224, 480, 195, 277, 235,...])
-                activeExternalCells=motorPattern,
-                formInternalConnections=True,
-                learn=tmLearn)
+    for i in xrange(len(sensorSequences)):
+      for j in xrange(len(sensorSequences[i])):
+        sensorPattern = set(sensorSequences[i][j])
+        motorPattern = set(motorSequences[i][j])
+#        sensorimotorPattern = sensorimotorSequence[i][j]
+#        import pdb; pdb.set_trace()
+        self.tm.compute(sensorPattern,  # here the sequences are e.g. set([224, 480, 195, 277, 235,...])
+                  activeExternalCells=motorPattern,
+                  formInternalConnections=True,
+                  learn=tmLearn)
 
     if (showProgressInterval is not None
       and i > 0

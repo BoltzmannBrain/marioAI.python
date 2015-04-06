@@ -26,7 +26,7 @@ def processDataIn(data_string):
 
   return actions, x, y
 
-def runner(N):
+def runner():
   HOST = "localhost"
   PORT = 1123
 
@@ -36,7 +36,8 @@ def runner(N):
 
   sock.send("entering the python while loop...\n")
   motor_sequence = []
-  sensory_sequence = []
+  x_sequence = []
+  y_sequence = []
   i = 1
   while 1<2:
     data_in = sock.recv(1024)
@@ -67,14 +68,16 @@ def runner(N):
       # NOTE: this action is implemented at this position; i.e. gets agent to the next x,y
       # this data represents the environment preceding the action for this step
     motor_sequence.append(mario_action)
-    sensory_sequence.append(mario_x)  # ignoring y locations for now
+    x_sequence.append(mario_x)
+    y_sequence.append(mario_y)
     data_out = getAction(i)
     sock.send(data_out)  # random for sensorimotor
     print "data sent: ", data_out
     i += 1
 
-  return motor_sequence, sensory_sequence
+  sensory_sequences = [x_sequence, y_sequence]
+  return motor_sequence, sensory_sequences
 
 
 if __name__ == "__main__":
-  runner(N)
+  runner()

@@ -16,14 +16,14 @@ public final class Main {
 	//    marioAIOptions.setAgent(new ch.idsia.agents.controllers.HTMAgent());
 	    marioAIOptions.setAgent(new ch.idsia.agents.controllers.ForwardJumpingAgent());
 	    marioAIOptions.setFlatLevel(true);
-	    marioAIOptions.setLevelLength(32);
-	    marioAIOptions.setLevelHeight(16);
+	    marioAIOptions.setLevelLength(72);
+	    marioAIOptions.setLevelHeight(36);
 	    marioAIOptions.setLevelDifficulty(0);
 	    marioAIOptions.setLevelRandSeed(42);
 	    marioAIOptions.setLevelType(0);  // 1 is underground
 	    
-	    marioAIOptions.setViewWidth(500);
-	    marioAIOptions.setViewHeight(500);
+	    marioAIOptions.setViewWidth(320);
+	    marioAIOptions.setViewHeight(240);
 	    
 //        for (int i = 0; i < 10; ++i)
 //        {
@@ -42,7 +42,7 @@ public final class Main {
 //	    basicTask.runSingleEpisode(1);
 	    final HTMTask sensorimotorTask = new HTMTask(marioAIOptions);
 	    sensorimotorTask.setOptionsAndReset(marioAIOptions);
-	    sensorimotorTask.doEpisodes(2, true, 1);
+	    sensorimotorTask.doEpisodes(3, true, 1);
 	
 	    System.exit(0);
 	}

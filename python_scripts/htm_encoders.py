@@ -20,43 +20,57 @@
 # http://numenta.org/licenses/
 # ----------------------------------------------------------------------
 
-from nupic.encoders.sdrcategory import SDRCategoryEncoder
+#from nupic.encoders.sdrcategory import SDRCategoryEncoder
 
 
 
 class MarioEncoders(object):
   
-  def __init__(self, n, w):
+  def __init__(self, n, w, verbose):
     self.n = n
     self.w = w
+    self.verbose = verbose
   
   
-  def _transformBinaryVector(vector):
+  def _transformBinaryVector(self, vector):
     transform = [i for i in range(len(vector)) if vector[i]==1]
+    if self.verbose:
+      print "vector: ", vector
+      print "transform: ", transform
     assert sum(vector)==len(transform)
     return transform
 
 
-  def encodeSensorySequences(self, sequences, n, w):
-    SDRs = []
-    for s in sequence:
-      sdr = self._transformBinaryVector(SDRCategoryEncoder.encode(s, n, w, force=True))
-      SDRs.append(sdr)
-    return SDRs
+#  def encodeSensorySequence(self, sequence, n, w):
+#    SDRs = []
+#    sdr_encoder = SDRCategoryEncoder(n, w, forced=True)
+#    for s in sequence:
+#      sdr = self._transformBinaryVector(sdr_encoder.encode(s))
+#      if self.verbose:
+#        print "s: ", s
+#        print "sdr: ", sdr
+#      SDRs.append(sdr)
+#    return SDRs
 
 
-  def encodeXYPositionSequences(self, x_sequences, y_sequences):
-    # Encode both the x and y sequences for n/2 and w/2, then merge.
-    assert len(x_sequences)==len(y_sequences)
-    n = self.n/2
-    w = self.w/2
+  def encodeXYPositionSequences(self, sequences, ranges):
+    # sequences[0] -> x, and sequences[1] -> y
+    assert len(sequences[0])==len(sequences[1])
+    x_section = float(self.n/2) / float(ranges[0][1]-ranges[0][0])
+    y_section = float(self.n/2) / float(ranges[1][1]-ranges[1][0])
     SDRs = []
-    for i in range(len(x_sequences)):
-      assert len(x_sequences[i])==len(y_sequences[i])
-      x_sdr = self.encodeSensorySequences(x_sequences[i], n, w)
-      y_sdr = self.encodeSensorySequences(y_sequences[i], n, w)
-      sdr = x_sdr + y_sdr
-      SDRs.append(sdr)
+    for i in range(len(sequences[0])): # for each sequence
+      assert len(sequences[0][i])==len(sequences[1][i])
+      SDR = []
+      for j in range(len(sequences[0][i])):
+        # encode x
+        x_sdr = range(int(sequences[0][i][j]*x_section),
+                      int(sequences[0][i][j]*x_section + self.w/2))
+        # encode y
+        y_sdr = range(int(self.n/2 + sequences[1][i][j]*y_section),
+                      int(self.n/2 + sequences[1][i][j]*y_section + self.w/2))
+        SDR.append(x_sdr + y_sdr)
+      SDRs.append(SDR)
     return SDRs
 
 
@@ -66,13 +80,14 @@ class MarioEncoders(object):
     for sequence in sequences:
       SDR = []
       for s in sequence:
-        section = n/len(s)
-        numON = w/sum(s)  # for every ON bit in s, this is the # of ON bits in the subsequent sdr
+        section = self.n/len(s)
+        numON = self.w/sum(s)  # for every ON bit in s, this is the # of ON bits in the subsequent sdr
         idx = [i*section for i in xrange(len(s)) if s[i]==1]
-  #      sdr = numpy.zeros(n)
-  #      for i in idx:
-  #        sdr[i:i+numON] = 1
-  #      sdr = self._transformBinaryVector(sdr)
+        if self.verbose:
+          print "s: ", s
+          print "individual motor sdr: ", idx
         SDR.append(idx)
+      if self.verbose:
+        print "sequence SDR: ", SDR
       SDRs.append(SDR)
     return SDRs

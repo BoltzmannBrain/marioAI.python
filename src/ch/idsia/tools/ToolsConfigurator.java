@@ -124,7 +124,7 @@ static void CreateMarioComponentFrame(SimulationOptions simulationOptions)
 //            marioVisualComponent.init();
         marioComponentFrame.pack();
         marioComponentFrame.setResizable(false);
-
+//        marioComponentFrame.setSize(new Dimension(1280,960));
         marioComponentFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 //        marioComponentFrame.setTitle(evaluationOptions.getAgent().getName() + " - Mario Intelligent 2.0");
@@ -138,7 +138,7 @@ enum INTERFACE_TYPE
     CONSOLE, GUI
 }
 
-Dimension defaultSize = new Dimension(330, 100);
+Dimension defaultSize = new Dimension(320, 240);
 Point defaultLocation = new Point(0, 320);
 
 public Checkbox CheckboxShowGameViewer = new Checkbox("Show Game Viewer", true);

@@ -128,8 +128,10 @@ public void setArgs(String[] args)
     else
         GlobalOptions.marioEgoRow = getMarioEgoPosRow();
 
-    GlobalOptions.VISUAL_COMPONENT_HEIGHT = getViewHeight();
-    GlobalOptions.VISUAL_COMPONENT_WIDTH = getViewWidth();
+//    GlobalOptions.VISUAL_COMPONENT_HEIGHT = getViewHeight();
+//    GlobalOptions.VISUAL_COMPONENT_WIDTH = getViewWidth();
+    GlobalOptions.VISUAL_COMPONENT_HEIGHT = 400;
+    GlobalOptions.VISUAL_COMPONENT_WIDTH = 800;
 //        Environment.ObsWidth = GlobalOptions.receptiveFieldWidth/2;
 //        Environment.ObsHeight = GlobalOptions.receptiveFieldHeight/2;
     GlobalOptions.isShowReceptiveField = isReceptiveFieldVisualized();

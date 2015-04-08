@@ -60,8 +60,8 @@ class MarioSensorimotorRunner(object):
     "permanenceIncrement": 0.1,
     "permanenceDecrement": 0.02,
 
-    # from params/online/reasonable/1024.yaml
-    "columnDimensions": [1024],
+    # from params/online/reasonable/2048.yaml
+    "columnDimensions": [2048],
     "minThreshold": 20,
     "maxNewSynapseCount": 30,
     "activationThreshold": 20
@@ -95,7 +95,7 @@ class MarioSensorimotorRunner(object):
     return (sensorySDRs, motorSDRs)
 
 
-  def feed(self, sequences, tmLearn=True, tpLearn=None, verbosity=0,
+  def feed(self, sequences, tmLearn=True, tpLearn=None, verbosity=2,
            showProgressInterval=None):
     # Note: not setup for TP...
     # https://github.com/numenta/nupic.research/blob/master/sensorimotor/sensorimotor/sensorimotor_experiment_runner.py#L131
@@ -125,7 +125,7 @@ class MarioSensorimotorRunner(object):
                   activeExternalCells=motorPattern,
                   formInternalConnections=True,
                   learn=tmLearn)
-
+    
     if (showProgressInterval is not None
       and i > 0
       and i % showProgressInterval == 0):

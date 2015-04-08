@@ -49,7 +49,7 @@ import java.awt.event.ItemListener;
 
 public class GameViewer extends JFrame
 {
-Dimension defaultSize = new Dimension(900, 800);
+Dimension defaultSize = new Dimension(320, 240);
 Point defaultLocation = new Point(350, 10);
 
 //    Thread animator;
@@ -177,7 +177,9 @@ public GameViewer(MarioAIOptions marioAIOptions)
     Point location = null;
 
     setSize((size == null) ? defaultSize : size);
+//    setSize(defaultSize);
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+//    Dimension screenSize = new Dimension(1280, 960);
     defaultLocation.setLocation(screenSize.getWidth() - defaultSize.getWidth(), 0);
 
     setLocation((location == null) ? defaultLocation : location);

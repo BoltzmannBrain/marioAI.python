@@ -277,7 +277,7 @@ public void setJumpPower(float jp)
     setParameterValue("-jp", s(jp));
 }
 
-public int getReceptiveFieldWidth()
+public static int getReceptiveFieldWidth()
 {
     int ret = i(getParameterValue("-rfw"));
 //
@@ -295,7 +295,7 @@ public void setReceptiveFieldWidth(int rfw)
     setParameterValue("-rfw", s(rfw));
 }
 
-public int getReceptiveFieldHeight()
+public static int getReceptiveFieldHeight()
 {
     int ret = i(getParameterValue("-rfh"));
 //    if (ret % 2 == 0)

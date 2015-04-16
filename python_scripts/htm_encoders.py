@@ -84,7 +84,6 @@ class MarioEncoders(object):
         try:
           numON = self.w/sum(s)  # for every ON bit in s, this is the # of ON bits in the subsequent sdr
         except ZeroDivisionError:
-          print "HERE"
           numON = self.w
         idx = [i*section for i in xrange(len(s)) if s[i]==1]
         if self.verbose:

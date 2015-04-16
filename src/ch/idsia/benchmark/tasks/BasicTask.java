@@ -172,6 +172,13 @@ public EvaluationInfo getEvaluationInfo()
     return evaluationInfo;
 }
 
+@Override
+public void doEpisodes(int amount, boolean verbose,
+		int repetitionsOfSingleEpisode, boolean marioStats) throws Exception {
+	// TODO Auto-generated method stub
+	
+}
+
 }
 
 //            start timer

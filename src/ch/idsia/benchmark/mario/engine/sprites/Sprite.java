@@ -30,6 +30,7 @@ package ch.idsia.benchmark.mario.engine.sprites;
 import ch.idsia.benchmark.mario.engine.GlobalOptions;
 import ch.idsia.benchmark.mario.engine.MarioVisualComponent;
 import ch.idsia.benchmark.mario.engine.level.SpriteTemplate;
+import ch.idsia.tools.MarioAIOptions;
 
 import java.awt.*;
 
@@ -197,11 +198,11 @@ public void render(final Graphics og)
         {
 //                og.drawString("M", (int) x, (int) y);
             og.drawString("Matrix View", xPixel - 40, yPixel - 20);
-            int width = GlobalOptions.receptiveFieldWidth;// * 16;
-            int height = GlobalOptions.receptiveFieldHeight;// * 16;
-
-            int rows = GlobalOptions.receptiveFieldHeight;
-            int columns = GlobalOptions.receptiveFieldWidth;
+            int width = MarioAIOptions.getReceptiveFieldWidth();// * 16;
+            int height = MarioAIOptions.getReceptiveFieldHeight();// * 16;
+            System.out.println("GRID width = " + width);
+            int rows = width;
+            int columns = height;
 
             int marioCol = GlobalOptions.marioEgoCol;
             int marioRow = GlobalOptions.marioEgoRow;

@@ -45,68 +45,67 @@ import java.util.List;
  */
 public class ParameterContainer
 {
-protected HashMap<String, String> optionsHashMap = new HashMap<String, String>();
+protected static HashMap<String, String> optionsHashMap = new HashMap<String, String>();
 private static List<String> allowedOptions = null;
 protected static HashMap<String, String> defaultOptionsHashMap = null;
 private static final String[] allowed = new String[]{
         "-ag",   // path to agent
-//        "-amico",
         "-echo", // echo options
         "-ewf",  // System.exit(0) when evaluation finished
         "-fc",   // frozencreatures
-        "-cgr",  //level: Creatures gravity
-        "-mgr",  //level: Mario gravity
+        "-cgr",  // level: Creatures gravity
+        "-mgr",  // level: Mario gravity
         "-gv",   // GaveViewer <on|off>
         "-gvc",  // GameViewer continuous updates of the screen <on|off>
         "-gmm",  // level: Green mushroom mode <0|1>. 0(default) -- hurts Mario; 1 -- kills Mario.
         "-i",    // Invulnerability for Mario <on|off>
-        "-jp",  // Mario jump power
-        "-ld",  // level: difficulty
-        "-ll",  // level: length
-        "-lla", // level: ladder
-        "-ls",  // level: seed
-        "-lt",  // level: type
-        "-lh",  // level: height [16-20]
-        "-lde", // level: dead ends count
+        "-jp",   // Mario jump power
+        "-ld",   // level: difficulty
+        "-ll",   // level: length
+        "-lla",  // level: ladder
+        "-ls",   // level: seed
+        "-lt",   // level: type
+        "-lh",   // level: height [16-20]
+        "-lde",  // level: dead ends count
         "-lca",  // level: cannons count
-        "-lhs", // level: HillStraight count
-        "-ltb", // level: Tubes count
-        "-lb",  // level: blocks count
-        "-lco", // level: coins count
-        "-lg",  // level: gaps count
-        "-lhb", // level: hidden blocks count
-        "-le",  // level: enemies; set up with bit mask
-        "-lf",  // level: flat level
-        "-mm",  // Mario Mode <0|1|2>
-        "-mix", // TODO description
-        "-miy", // TODO description
-        "-mer", // Mario Ego Row
-        "-mec", // Mario Ego Column
-        "-fps", // Frames Per Second - update frequency
-        "-pr",  // Power resoration (cheat) (bring Mario to FIRE state if "Shoot/RUN" key activated.
-        "-punj",// Enable bytecode counting
-        "-rfh", // receptive field height (observation )
-        "-rfw", // receptive field length (observation )
-        "-srf", // show receptive field  (observation )
+        "-lhs",  // level: HillStraight count
+        "-ltb",  // level: Tubes count
+        "-lb",   // level: blocks count
+        "-lco",  // level: coins count
+        "-lg",   // level: gaps count
+        "-lhb",  // level: hidden blocks count
+        "-le",   // level: enemies; set up with bit mask
+        "-lf",   // level: flat level
+        "-mm",   // Mario Mode <0|1|2>
+        "-mix",  // TODO description
+        "-miy",  // TODO description
+        "-mer",  // Mario Ego Row
+        "-mec",  // Mario Ego Column
+        "-fps",  // Frames Per Second - update frequency
+        "-pr",   // Power resoration (cheat) (bring Mario to FIRE state if "Shoot/RUN" key activated.
+        "-punj", // Enable bytecode counting
+        "-rfh",  // receptive field height (observation )
+        "-rfw",  // receptive field length (observation )
+        "-srf",  // show receptive field  (observation )
         "-tc",   // TODO description
         "-tl",   // time limit <int>
         "-trace",// TODO description
         "-vaot", // View always on top <on|off>
         "-vis",  // Visualization <on|off>
-        "-vlx",  // View location x coordinate <int>
-        "-vly",  // View location y coordinate <int>
-        "-vw",   // View width <int>
-        "-vh",   // View height <int>
+        "-vlx",  // View window location x coordinate <int>
+        "-vly",  // View window location y coordinate <int>
+        "-vw",   // View window width <int>
+        "-vh",   // View window height <int>
         "-ze",   // Zoom level enemies
         "-zs",   // Zoom level scene
         "-stop", // Start the gamplay/(TODO: description in details for recording) and stop
         "-s",    // path to the file where level will be saved
-        "-rec",   // Recording <on|off>
-        "-z", //enable Scale2X on startup
-        "-w", //wind
-        "-ice", //ice
-        "-ex", //exitX
-        "-ey" //exitY
+        "-rec",  // Recording <on|off>
+        "-z",    //enable Scale2X on startup
+        "-w",    //wind
+        "-ice",  //ice
+        "-ex",   //exitX
+        "-ey"    //exitY
 };
 
 public ParameterContainer()
@@ -141,7 +140,7 @@ public void setParameterValue(String param, String value)
     }
 }
 
-public String getParameterValue(String param)
+public static String getParameterValue(String param)
 {
     String ret;
     ret = optionsHashMap.get(param);
@@ -176,7 +175,7 @@ public String getParameterValue(String param)
 //        }
 }
 
-public int i(String s)
+public static int i(String s)
 {
     return Integer.parseInt(s);
 }

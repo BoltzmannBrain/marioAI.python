@@ -35,7 +35,7 @@ public HTMTask(MarioAIOptions marioAIOptions) {
  * @param repetitionsOfSingleEpisode
  * @return boolean flag whether controller is disqualified or not
  */
-public boolean runSingleEpisode(final int repetitionsOfSingleEpisode) throws Exception {
+public boolean runSingleEpisode(final int repetitionsOfSingleEpisode, final boolean marioStats) throws Exception {
     long c = System.currentTimeMillis();
     for (int r = 0; r < repetitionsOfSingleEpisode; ++r) {
         this.reset();
@@ -59,10 +59,19 @@ public boolean runSingleEpisode(final int repetitionsOfSingleEpisode) throws Exc
 //        	System.out.println("position = " + environment.getMarioFloatPos());
             i += 1;
             
+            if (marioStats) {
+            	System.out.print("MODE: = " + this.getEnvironment().getEvaluationInfo().marioMode);
+                System.out.print(", TIME LEFT: " + this.getEnvironment().getEvaluationInfo().timeLeft);
+                System.out.print(", STATUS = " + environment.getEvaluationInfo().marioStatus);  // this.getEnvironment() == environment
+                System.out.print("\nMario Observations... " + 
+                		((MarioEnvironment) environment).getObservationStrings(false, false, true, 0, 0));
+            }
+            
             if (!GlobalOptions.isGameplayStopped) {
                 c = System.currentTimeMillis();
                 agent.integrateObservation(environment);
                 agent.giveIntermediateReward(environment.getIntermediateReward());
+//                System.out.println(environment.getObservationDetails());
 
                 boolean[] action = agent.getAction();  // keep this here, even when using HTM agent
                 if (System.currentTimeMillis() - c > COMPUTATION_TIME_BOUND)
@@ -70,7 +79,7 @@ public boolean runSingleEpisode(final int repetitionsOfSingleEpisode) throws Exc
 //                System.out.println("action = " + Arrays.toString(action));
 //            environment.setRecording(GlobalOptions.isRecording);
 
-                System.out.println("step #" + i);
+                System.out.println("\nstep #" + i);
                 
 //                out.println(environment.getIntermediateReward());
                 toClient = Integer.toString(environment.getMarioX()) + "+" + Integer.toString(environment.getMarioY()) + "+" + Arrays.toString(action);
@@ -101,6 +110,10 @@ public boolean runSingleEpisode(final int repetitionsOfSingleEpisode) throws Exc
                 System.out.println("socket closed");
             }
         }
+        // Print Mario's "fitness", as defined by points in ch.idsia.benchmark.tasks.MarioSystemOfValues.java
+        final MarioCustomSystemOfValues sov = new MarioCustomSystemOfValues();
+        System.out.println("FITNESS: " + this.getEnvironment().getEvaluationInfo().computeWeightedFitness(sov));
+        
         server.close();
         environment.closeRecorder(); //recorder initialized in environment.reset
         environment.getEvaluationInfo().setTaskName(name);
@@ -129,7 +142,7 @@ public void setOptionsAndReset(final String options) {
     reset();
 }
 
-public void doEpisodes(int amount, boolean verbose, final int repetitionsOfSingleEpisode) throws Exception
+public void doEpisodes(int amount, boolean verbose, final int repetitionsOfSingleEpisode, boolean marioStats) throws Exception
 {
     for (int j = 0; j < EvaluationInfo.numberOfElements; j++)
     {
@@ -138,9 +151,10 @@ public void doEpisodes(int amount, boolean verbose, final int repetitionsOfSingl
     for (int i = 0; i < amount; ++i)
     {
         this.reset();
-        this.runSingleEpisode(repetitionsOfSingleEpisode);
+        this.runSingleEpisode(repetitionsOfSingleEpisode, marioStats);
         if (verbose)
             System.out.println(environment.getEvaluationInfoAsString());
+        	System.out.println("Distance traveled = " + this.getEnvironment().getEvaluationInfo().computeDistancePassed());
 
         for (int j = 0; j < EvaluationInfo.numberOfElements; j++)
         {

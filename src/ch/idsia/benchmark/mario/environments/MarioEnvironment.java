@@ -128,6 +128,9 @@ public void reset(MarioAIOptions setUpOptions)
 
     receptiveFieldWidth = setUpOptions.getReceptiveFieldWidth();
     receptiveFieldHeight = setUpOptions.getReceptiveFieldHeight();
+//    receptiveFieldWidth = 4;
+//    receptiveFieldHeight = 4;
+    System.out.println("Receptive field dimensions: " + receptiveFieldWidth + "," + receptiveFieldHeight);
 
     if (receptiveFieldHeight != this.prevRFH || receptiveFieldWidth != this.prevRFW)
     {

@@ -48,7 +48,7 @@ public void setOptionsAndReset(final String options);
 
 void reset();
 
-void doEpisodes(final int amount, final boolean verbose, final int repetitionsOfSingleEpisode) throws Exception;
+void doEpisodes(final int amount, final boolean verbose, final int repetitionsOfSingleEpisode, final boolean marioStats) throws Exception;
 
 boolean isFinished();
 
